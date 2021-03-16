@@ -26,10 +26,13 @@ namespace OnlineExamAPI.Controllers
         private readonly IWebHostEnvironment _EnvFilePaths;
         private readonly IConfiguration _configuration;
         private OnlineExamContext _OnlineContext;
-        public AdminUsers(IWebHostEnvironment _webHostEnv, IConfiguration configuration)
+        private ILog _logger;
+        public AdminUsers(IWebHostEnvironment _webHostEnv, IConfiguration configuration, ILog Log_)
         {
             this._EnvFilePaths = _webHostEnv;
             _configuration = configuration;
+            this._logger = Log_;
+
         }
         #endregion
         #region "User Logon & Maintanence"
@@ -55,6 +58,7 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -103,10 +107,12 @@ namespace OnlineExamAPI.Controllers
                                  EmailID = Usrs.EmailId,
                                  ProfPic = urlpath + Url.Content($"/AdminImages/{Usrs.ImageUrl}")
                              }).ToList();
+                _logger.Information($"Current Logged User : ${_usrs[0].EmailID}");
                 return new OkObjectResult(new { Users = _usrs, Status = HttpStatusCode.OK });
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -135,10 +141,11 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
-        [Authorize]
+      /*  [Authorize]
         [HttpGet]
         [Route("[controller]/QuestionListing")]
         public async Task<IActionResult> QuestionListing()
@@ -157,10 +164,11 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
-        }
-        [AllowAnonymous]
+        } */
+        [Authorize]
         [HttpGet]
         [Route("[controller]/CategoryListing")]
         public async Task<IActionResult> CategoryListing()
@@ -182,6 +190,25 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
+                return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
+            }
+        }
+        [Authorize]
+        [HttpGet]
+        [Route("[controller]/QuestionListing")]
+        public async Task<IActionResult> QuestionListing()
+        {
+            try
+            {
+                _logger.Information("Question Listin");
+                _OnlineContext = new OnlineExamContext();
+                var Question = await _OnlineContext.Questions.Include(xc => xc.Choices).ToListAsync();
+                return new OkObjectResult(new { Data = Question, Status = HttpStatusCode.OK });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -249,7 +276,8 @@ namespace OnlineExamAPI.Controllers
             try
             {
                 _OnlineContext = new OnlineExamContext();
-                if (_category.Cid == null)
+                var category = await _OnlineContext.Categories.FirstOrDefaultAsync(xc => xc.Cid.Equals(_category.Cid));
+                if (category == null)
                 {
                     _category.CqstType = 1;
                     _category.CtotalQst = _category.CnoOfQst;
@@ -259,7 +287,6 @@ namespace OnlineExamAPI.Controllers
                 }
                 else
                 {
-                    var category = await _OnlineContext.Categories.FirstOrDefaultAsync(xc => xc.Cid.Equals(_category.Cid));
                     category.Cdesc = _category.Cdesc;
                     category.CdefaultScoreorQst = _category.CdefaultScoreorQst;
                     category.CnoOfQst = _category.CnoOfQst;
@@ -273,6 +300,7 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -297,6 +325,36 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
+                return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
+            }
+        }
+        [Authorize]
+        [HttpDelete]
+        [Route("[controller]/DeleteCategory/{ID}")]
+        public async Task<IActionResult> DeleteCategory(string ID)
+        {
+            try
+            {
+                _OnlineContext = new OnlineExamContext();
+                if (_OnlineContext.Categories.Any(xc => xc.Cid.ToString() == ID))
+                {
+                    var _category = await _OnlineContext.Categories.FirstOrDefaultAsync(xc => xc.Cid.ToString() == ID);
+                    _OnlineContext.Categories.Attach(_category);
+                    _OnlineContext.Categories.Remove(_category);
+                    await _OnlineContext.SaveChangesAsync();
+                    _logger.Information($"Deleted Category ID is {ID}");
+                    return new OkObjectResult(new { Message = "Deleted", Status = HttpStatusCode.OK });
+                }
+                else
+                {
+                    _logger.Debug($"Delete Request For Category ID : {ID}");
+                    return new OkObjectResult(new { Message = "No Data Found", Status = HttpStatusCode.NotFound });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -310,33 +368,57 @@ namespace OnlineExamAPI.Controllers
             try
             {
                 _OnlineContext = new OnlineExamContext();
-                AdminUser adminUser = new AdminUser();
-                adminUser.Firstname = Request.Form["Firstname"];
-                adminUser.Lastname = Request.Form["Lastname"];
-                adminUser.EmailId = Request.Form["EmailId"];
-                adminUser.Apassword = PasswordDecrpt.DecryptPassword(Request.Form["Apassword"]);
-                adminUser.DateofBirth = DateTime.Now;
-                // Convert.ToDateTime(Request.Form["DateofBirth"]);
-                var file = Request.Form.Files[0];
-                if (file.Length > 0)
+                string _id = Request.Form["AdminUsId"];
+                if (_id == null)
                 {
-                    adminUser.ImageUrl = adminUser.EmailId + file.FileName.Substring(file.FileName.LastIndexOf('.'));
-                    string filepath = _EnvFilePaths.WebRootPath + "/AdminImages/" + adminUser.ImageUrl;
-                    using (var stream = new FileStream(filepath, FileMode.Create))
+                    AdminUser adminUser = new AdminUser();
+                    adminUser.Firstname = Request.Form["Firstname"];
+                    adminUser.Lastname = Request.Form["Lastname"];
+                    adminUser.EmailId = Request.Form["EmailId"];
+                    adminUser.Apassword = PasswordDecrpt.DecryptPassword(Request.Form["Apassword"]);
+                    adminUser.DateofBirth = Convert.ToDateTime(Request.Form["DateofBirth"]);
+                    if (Request.Form?.Files.Count() > 0)
                     {
-                        file.CopyTo(stream);
+                        var file = Request.Form.Files[0];
+                        adminUser.ImageUrl = adminUser.EmailId + file.FileName.Substring(file.FileName.LastIndexOf('.'));
+                        string filepath = _EnvFilePaths.WebRootPath + "/AdminImages/" + adminUser.ImageUrl;
+                        using (var stream = new FileStream(filepath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
                     }
+                    else
+                    {
+                        adminUser.ImageUrl = "DefaultImage.png";
+                    }
+                    _OnlineContext.AdminUsers.Add(adminUser);
+                    _OnlineContext.SaveChanges();
+                    return new OkObjectResult(new { Message = "User Created Successfully", Status = HttpStatusCode.OK });
                 }
                 else
                 {
-                    adminUser.ImageUrl = "DefaultImage.png";
+                    var _EditAdminUser = _OnlineContext.AdminUsers.FirstOrDefault(xus => xus.AdminUsId.ToString() == _id);
+                    _EditAdminUser.Firstname = Request.Form["Firstname"];
+                    _EditAdminUser.Lastname = Request.Form["Lastname"];
+                    _EditAdminUser.EmailId = Request.Form["EmailId"];
+                   // _EditAdminUser.DateofBirth = Convert.ToDateTime(Request.Form["DateofBirth"]);
+                    if (Request.Form?.Files.Count() > 0)
+                    {
+                        var file = Request.Form.Files[0];
+                        _EditAdminUser.ImageUrl = _EditAdminUser.EmailId + file.FileName.Substring(file.FileName.LastIndexOf('.'));
+                        string filepath = _EnvFilePaths.WebRootPath + "/AdminImages/" + _EditAdminUser.ImageUrl;
+                        using (var stream = new FileStream(filepath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                    }
+                    _OnlineContext.SaveChanges();
+                    return new OkObjectResult(new { Message = "Updated Successfully", Status = HttpStatusCode.OK });
                 }
-                _OnlineContext.AdminUsers.Add(adminUser);
-                _OnlineContext.SaveChanges();
-                return new OkObjectResult(new { Message = "User Created Successfully", Status = HttpStatusCode.OK, Data_ = adminUser });
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString()+Request.Form.Files);
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -361,7 +443,6 @@ namespace OnlineExamAPI.Controllers
                                            Lastname = usr.Lastname,
                                            AdminUsId = usr.AdminUsId,
                                            EmailId = usr.EmailId,
-                                           Apassword = usr.Apassword,
                                            DateofBirth = usr.DateofBirth,
                                            ImageUrl = urlpath + Url.Content($"/AdminImages/{usr.ImageUrl}")
                                        }).ToListAsync();
@@ -374,6 +455,7 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Message.ToString());
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }

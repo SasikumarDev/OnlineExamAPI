@@ -69,3 +69,6 @@
 /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/AdminClient/tsconfig.json
 /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/AdminClient/tsconfig.spec.json
 /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/AdminClient/tslint.json
+/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/nlog.config
+/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/NLog.dll
+/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/NLog.Extensions.Logging.dll

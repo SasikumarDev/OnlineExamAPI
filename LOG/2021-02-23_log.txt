@@ -1,0 +1,7 @@
+2021-02-23 17:02:51.8084 INFO Current Logged User : $LoguRajuB@gmail.com
+2021-02-23 17:03:31.0532 INFO Deleted Category ID is ed41500b-28fa-42e8-85ae-8950378fbbee
+2021-02-23 17:04:14.2977 INFO Deleted Category ID is f20c8df7-2748-4028-ae93-98e5846bcb94
+2021-02-23 17:04:58.6469 ERROR Object reference not set to an instance of an object.
+2021-02-23 17:05:21.7392 ERROR Object reference not set to an instance of an object.
+2021-02-23 21:54:32.0176 INFO Current Logged User : $LoguRajuB@gmail.com
+2021-02-23 21:55:00.9157 ERROR Object reference not set to an instance of an object.

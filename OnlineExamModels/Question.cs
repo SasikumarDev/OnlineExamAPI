@@ -10,6 +10,7 @@ namespace OnlineExamAPI.OnlineExamModels
         public Question()
         {
             Choices = new HashSet<Choice>();
+            IntervieweeTests = new HashSet<IntervieweeTest>();
         }
 
         public Guid Qid { get; set; }
@@ -21,5 +22,6 @@ namespace OnlineExamAPI.OnlineExamModels
 
         public virtual Category Qc { get; set; }
         public virtual ICollection<Choice> Choices { get; set; }
+        public virtual ICollection<IntervieweeTest> IntervieweeTests { get; set; }
     }
 }

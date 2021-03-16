@@ -7,6 +7,11 @@ namespace OnlineExamAPI.OnlineExamModels
 {
     public partial class Choice
     {
+        public Choice()
+        {
+            IntervieweeTests = new HashSet<IntervieweeTest>();
+        }
+
         public Guid Cid { get; set; }
         public Guid? Qid { get; set; }
         public string Ctext { get; set; }
@@ -16,5 +21,6 @@ namespace OnlineExamAPI.OnlineExamModels
         public DateTime CupdateOn { get; set; }
 
         public virtual Question QidNavigation { get; set; }
+        public virtual ICollection<IntervieweeTest> IntervieweeTests { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NhKBCoyAeMRB+uaRM75X1nziB/FtXXGbv2HqfMIfKmCLRcF07wz/N0U/GeOZQDm3ZS41V4/AJSBdl6Z7AX9nCg==",
+  "dgSpecHash": "saP39lQ8k04yVc/Bm+JzPcGKCT03DdDtacCxYZmEgxgFF5Vfjiuw2q7y17tjDpmuMRkIQqX7X+zREePpu/oDCA==",
   "success": true,
   "projectFilePath": "/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/OnlineExamAPI.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,8 @@
     "/home/sasikumar/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/home/sasikumar/.nuget/packages/microsoft.win32.registry/4.7.0/microsoft.win32.registry.4.7.0.nupkg.sha512",
     "/home/sasikumar/.nuget/packages/microsoft.win32.systemevents/4.7.0/microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "/home/sasikumar/.nuget/packages/nlog/4.7.6/nlog.4.7.6.nupkg.sha512",
+    "/home/sasikumar/.nuget/packages/nlog.extensions.logging/1.7.0/nlog.extensions.logging.1.7.0.nupkg.sha512",
     "/home/sasikumar/.nuget/packages/runtime.native.system/4.3.0/runtime.native.system.4.3.0.nupkg.sha512",
     "/home/sasikumar/.nuget/packages/swashbuckle.aspnetcore/5.6.3/swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "/home/sasikumar/.nuget/packages/swashbuckle.aspnetcore.swagger/5.6.3/swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

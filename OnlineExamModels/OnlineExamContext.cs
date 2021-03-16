@@ -20,6 +20,9 @@ namespace OnlineExamAPI.OnlineExamModels
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Choice> Choices { get; set; }
+        public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
+        public virtual DbSet<Interviewee> Interviewees { get; set; }
+        public virtual DbSet<IntervieweeTest> IntervieweeTests { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -143,6 +146,107 @@ namespace OnlineExamAPI.OnlineExamModels
                     .WithMany(p => p.Choices)
                     .HasForeignKey(d => d.Qid)
                     .HasConstraintName("FK_QID");
+            });
+
+            modelBuilder.Entity<EmailTemplate>(entity =>
+            {
+                entity.HasKey(e => e.Etid)
+                    .HasName("PK__EmailTem__2375175E9DC1CE23");
+
+                entity.ToTable("EmailTemplate");
+
+                entity.Property(e => e.Etid)
+                    .HasColumnName("ETId")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Etcreatedon)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ETCreatedon")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Etsubject)
+                    .HasMaxLength(500)
+                    .IsUnicode(false)
+                    .HasColumnName("ETSubject");
+
+                entity.Property(e => e.Ettemplate).HasColumnName("ETTemplate");
+            });
+
+            modelBuilder.Entity<Interviewee>(entity =>
+            {
+                entity.HasKey(e => e.Iid)
+                    .HasName("PK__Intervie__C4972BAC99E7BF4F");
+
+                entity.ToTable("Interviewee");
+
+                entity.Property(e => e.Iid)
+                    .HasColumnName("IId")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.IattentPreviousTest).HasColumnName("IAttentPreviousTest");
+
+                entity.Property(e => e.Idob)
+                    .HasColumnType("datetime")
+                    .HasColumnName("IDOB");
+
+                entity.Property(e => e.IemailId)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("IEmailID");
+
+                entity.Property(e => e.Ifname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("IFname");
+
+                entity.Property(e => e.Ilname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ILname");
+
+                entity.Property(e => e.Imobileno)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("IMobileno");
+            });
+
+            modelBuilder.Entity<IntervieweeTest>(entity =>
+            {
+                entity.HasKey(e => e.Itid)
+                    .HasName("PKITID");
+
+                entity.ToTable("IntervieweeTest");
+
+                entity.Property(e => e.Itid)
+                    .HasColumnName("ITID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.ItchoiceId).HasColumnName("ITChoiceID");
+
+                entity.Property(e => e.Itiid).HasColumnName("ITIId");
+
+                entity.Property(e => e.ItiscorrectAns).HasColumnName("ITISCorrectAns");
+
+                entity.Property(e => e.ItqstId).HasColumnName("ITQstID");
+
+                entity.HasOne(d => d.Itchoice)
+                    .WithMany(p => p.IntervieweeTests)
+                    .HasForeignKey(d => d.ItchoiceId)
+                    .HasConstraintName("FKITCID");
+
+                entity.HasOne(d => d.Iti)
+                    .WithMany(p => p.IntervieweeTests)
+                    .HasForeignKey(d => d.Itiid)
+                    .HasConstraintName("FKITIId");
+
+                entity.HasOne(d => d.Itqst)
+                    .WithMany(p => p.IntervieweeTests)
+                    .HasForeignKey(d => d.ItqstId)
+                    .HasConstraintName("FKITQID");
             });
 
             modelBuilder.Entity<Question>(entity =>
