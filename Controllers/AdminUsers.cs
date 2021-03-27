@@ -1,6 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-// using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -25,15 +25,27 @@ namespace OnlineExamAPI.Controllers
         #region "Constructor"
         private readonly IWebHostEnvironment _EnvFilePaths;
         private readonly IConfiguration _configuration;
-        private OnlineExamContext _OnlineContext;
+        private readonly OnlineExamContext _OnlineContext;
         private ILog _logger;
-        public AdminUsers(IWebHostEnvironment _webHostEnv, IConfiguration configuration, ILog Log_)
+        public AdminUsers(IWebHostEnvironment _webHostEnv, IConfiguration configuration, ILog Log_,OnlineExamContext _context)
         {
             this._EnvFilePaths = _webHostEnv;
             _configuration = configuration;
             this._logger = Log_;
-
+            this._OnlineContext = _context;
         }
+
+        #region "Test Endpoints"
+        [AllowAnonymous]
+        [Route("[controller]/TestGet")]
+        [HttpGet]
+        public IActionResult TestGet()
+        {
+            
+            return Ok(_OnlineContext.AdminUsers.ToList());
+        }
+        #endregion
+
         #endregion
         #region "User Logon & Maintanence"
         [AllowAnonymous]
@@ -43,7 +55,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 user.Apassword = PasswordDecrpt.DecryptPassword(user.Apassword);
                 var _user = _OnlineContext.AdminUsers.FirstOrDefault(us => us.EmailId == user.EmailId && us.Apassword == user.Apassword);
                 if (_user != null)
@@ -98,7 +110,7 @@ namespace OnlineExamAPI.Controllers
                 string urlpath = Request.Scheme + "://" + Request.Host.Value;
                 var identity = User.Identity as ClaimsIdentity;
                 var name = identity.Claims.Cast<Claim>().Where(p => p.Type == "UserID").FirstOrDefault()?.Value;
-                _OnlineContext = new OnlineExamContext();
+                
                 var _usrs = (from Usrs in _OnlineContext.AdminUsers
                              where Usrs.AdminUsId.ToString() == name.ToString()
                              select new
@@ -125,7 +137,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 var Users = await (from Aduser in _OnlineContext.AdminUsers
                                    select new
                                    {
@@ -145,29 +157,6 @@ namespace OnlineExamAPI.Controllers
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
-      /*  [Authorize]
-        [HttpGet]
-        [Route("[controller]/QuestionListing")]
-        public async Task<IActionResult> QuestionListing()
-        {
-            try
-            {
-                _OnlineContext = new OnlineExamContext();
-                var Questions = await (from Qst in _OnlineContext.Questions
-                                       join Chs in _OnlineContext.Choices on Qst.Qcid equals Chs.Qid
-                                       select new
-                                       {
-                                           Qid = Qst.Qid,
-                                           Qstion = Qst.Qtext
-                                       }).ToListAsync();
-                return new OkObjectResult(new { Question = Questions, Status = HttpStatusCode.OK });
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message.ToString());
-                return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
-            }
-        } */
         [Authorize]
         [HttpGet]
         [Route("[controller]/CategoryListing")]
@@ -175,7 +164,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 var _category = await (from ct in _OnlineContext.Categories
                                        select new
                                        {
@@ -202,7 +191,7 @@ namespace OnlineExamAPI.Controllers
             try
             {
                 _logger.Information("Question Listin");
-                _OnlineContext = new OnlineExamContext();
+                
                 var Question = await _OnlineContext.Questions.Include(xc => xc.Choices).ToListAsync();
                 return new OkObjectResult(new { Data = Question, Status = HttpStatusCode.OK });
             }
@@ -217,7 +206,7 @@ namespace OnlineExamAPI.Controllers
         [NonAction]
         public async Task<AdminUser> GetCrntUser(HttpContext httpContext)
         {
-            _OnlineContext = new OnlineExamContext();
+            
             var identity = User.Identity as ClaimsIdentity;
             var name = identity.Claims.Cast<Claim>().Where(p => p.Type == "UserID").FirstOrDefault()?.Value;
             if (name != null)
@@ -232,7 +221,7 @@ namespace OnlineExamAPI.Controllers
         [NonAction]
         public AdminUser GetCrntUserNonayc(HttpContext httpContext)
         {
-            _OnlineContext = new OnlineExamContext();
+            
             var identity = User.Identity as ClaimsIdentity;
             var name = identity.Claims.Cast<Claim>().Where(p => p.Type == "UserID").FirstOrDefault()?.Value;
             if (name != null)
@@ -275,7 +264,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 var category = await _OnlineContext.Categories.FirstOrDefaultAsync(xc => xc.Cid.Equals(_category.Cid));
                 if (category == null)
                 {
@@ -311,7 +300,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 var isexists = await _OnlineContext.Categories.AnyAsync(xc => xc.Cid.ToString() == ID);
                 if (isexists)
                 {
@@ -336,7 +325,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 if (_OnlineContext.Categories.Any(xc => xc.Cid.ToString() == ID))
                 {
                     var _category = await _OnlineContext.Categories.FirstOrDefaultAsync(xc => xc.Cid.ToString() == ID);
@@ -367,7 +356,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 string _id = Request.Form["AdminUsId"];
                 if (_id == null)
                 {
@@ -401,7 +390,7 @@ namespace OnlineExamAPI.Controllers
                     _EditAdminUser.Firstname = Request.Form["Firstname"];
                     _EditAdminUser.Lastname = Request.Form["Lastname"];
                     _EditAdminUser.EmailId = Request.Form["EmailId"];
-                   // _EditAdminUser.DateofBirth = Convert.ToDateTime(Request.Form["DateofBirth"]);
+                    // _EditAdminUser.DateofBirth = Convert.ToDateTime(Request.Form["DateofBirth"]);
                     if (Request.Form?.Files.Count() > 0)
                     {
                         var file = Request.Form.Files[0];
@@ -418,7 +407,7 @@ namespace OnlineExamAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message.ToString()+Request.Form.Files);
+                _logger.Error(ex.Message.ToString() + Request.Form.Files);
                 return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
             }
         }
@@ -429,7 +418,7 @@ namespace OnlineExamAPI.Controllers
         {
             try
             {
-                _OnlineContext = new OnlineExamContext();
+                
                 var userexistence = await _OnlineContext.AdminUsers.AnyAsync(xau => xau.AdminUsId.ToString().Equals(ID));
                 if (userexistence)
                 {
@@ -460,5 +449,27 @@ namespace OnlineExamAPI.Controllers
             }
         }
         #endregion
+        #region "Question Save,update,get"
+        [Authorize]
+        [Route("[controller]/SaveQuestion")]
+        [HttpPost]
+        public IActionResult SaveQuestion(AdditionalParamaters QuestionandChoices)
+        {
+            try
+            {
+                return new OkObjectResult(new { Message = "Saved Succesfully", Status = HttpStatusCode.InternalServerError });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message.ToString());
+                return new OkObjectResult(new { Message = ex.Message.ToString(), Status = HttpStatusCode.InternalServerError });
+            }
+        }
+        #endregion
+    }
+    public class AdditionalParamaters
+    {
+        public Question question { get; set; }
+        public List<Choice> choices { get; set; }
     }
 }

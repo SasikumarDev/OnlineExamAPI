@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using NLog;
 using OnlineExamAPI.common;
+using OnlineExamAPI.OnlineExamModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineExamAPI
 {
@@ -25,10 +27,12 @@ namespace OnlineExamAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+             services.AddDbContext<OnlineExamContext>(option =>
+            option.UseSqlServer("Server=localhost;User ID = SA;Password = Sa.123456789;Database=MiniOnlineExam;Trusted_Connection=False;"));
             services.AddCors(options =>
             {
                 options.AddPolicy(name: _Adminpolicy, Builder =>
-                 Builder.WithOrigins("http://localhost:4200","http://127.0.0.1:4200/","http://192.168.43.205:4200/")
+                 Builder.WithOrigins("http://localhost:4200", "http://127.0.0.1:4200/", "http://192.168.43.205:4200/")
                  .AllowAnyHeader()
                  .AllowAnyMethod()
                  .AllowCredentials());
@@ -68,7 +72,7 @@ namespace OnlineExamAPI
                    };
                });
             services.AddControllers();
-            services.AddSingleton<ILog,LoggerService>();
+            services.AddSingleton<ILog, LoggerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

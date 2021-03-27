@@ -1,8 +1,0 @@
-2021-02-21 16:36:32.6082 INFO Current Logged User : $Sasikumar@gmail.com
-2021-02-21 16:41:07.1811 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-21 17:18:45.0523 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-21 17:19:55.8308 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-21 17:20:12.1220 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-21 17:20:27.9514 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-21 17:27:56.8626 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-21 17:28:07.2088 INFO Deleted Category ID is ed178d41-33ab-4c46-b923-91da0e7dfe5e

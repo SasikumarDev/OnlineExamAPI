@@ -1,2 +1,0 @@
-2021-02-28 11:12:49.9273 INFO Current Logged User : $LoguRajuB@gmail.com
-2021-02-28 11:15:32.4919 ERROR String '20-0-1994' was not recognized as a valid DateTime.

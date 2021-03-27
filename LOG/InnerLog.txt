@@ -2438,3 +2438,207 @@ File name: 'NLog.Extended, Culture=neutral, PublicKeyToken=null'
 2021-03-12 19:51:28.7866 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-12_log.txt with allowFileSharedWriting=False
 2021-03-12 19:52:23.2803 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-12_log.txt with allowFileSharedWriting=False
 2021-03-12 19:53:03.7659 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-12_log.txt with allowFileSharedWriting=False
+2021-03-19 19:02:32.1889 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2021-03-19 19:02:32.3379 Debug Found assembly location directory: '/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2021-03-19 19:02:32.3668 Debug Search for auto loading files in location: /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0
+2021-03-19 19:02:32.3708 Debug Start auto loading, location: /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0
+2021-03-19 19:02:32.3751 Info Auto loading assembly file: /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/NLog.Extensions.Logging.dll
+2021-03-19 19:02:32.3761 Info Loading assembly file: /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/NLog.Extensions.Logging.dll
+2021-03-19 19:02:32.5208 Info NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 1.7.0.1463. Product version: 1.7.0+53f8c72107ad200657b89638c4d236a0c9e351eb. GlobalAssemblyCache: False
+2021-03-19 19:02:32.5208 Debug ScanAssembly('NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2021-03-19 19:02:32.5262 Info Auto loading assembly file: /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/NLog.Extensions.Logging.dll succeeded!
+2021-03-19 19:02:32.5297 Trace Assembly 'Microsoft.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2021-03-19 19:02:32.5313 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2021-03-19 19:02:32.5313 Trace Assembly 'NLog.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c' will be hidden in callsite stacktrace
+2021-03-19 19:02:32.5313 Debug Auto loading done
+2021-03-19 19:02:32.5355 Info Message Template Auto Format enabled
+2021-03-19 19:02:32.5470 Info Loading assembly: NLog.Extended
+2021-03-19 19:02:32.5489 Trace Try find 'NLog.Extended' in current domain
+2021-03-19 19:02:32.5529 Trace Haven't found' 'NLog.Extended' in current domain
+2021-03-19 19:02:32.5564 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Extended
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Extended, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+
+File name: 'NLog.Extended, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(ObjectHandleOnStack assemblyName, ObjectHandleOnStack requestingAssembly, StackCrawlMarkHandle stackMark, Boolean throwOnFileNotFound, ObjectHandleOnStack assemblyLoadContext, ObjectHandleOnStack retAssembly)
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, RuntimeAssembly requestingAssembly, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, AssemblyLoadContext assemblyLoadContext)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2021-03-19 19:02:32.6304 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.6378 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2021-03-19 19:02:32.6527 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2021-03-19 19:02:32.6563 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2021-03-19 19:02:32.6563 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.6563 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.6596 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.6596 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2021-03-19 19:02:32.6668 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2021-03-19 19:02:32.6688 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2021-03-19 19:02:32.6688 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.6744 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.6757 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.6757 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2021-03-19 19:02:32.6757 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.6757 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2021-03-19 19:02:32.6926 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2021-03-19 19:02:32.6926 Debug Setting 'NLog.Targets.FileTarget.fileName' to '/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt'
+2021-03-19 19:02:32.6963 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.6963 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2021-03-19 19:02:32.7000 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2021-03-19 19:02:32.7000 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.7000 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2021-03-19 19:02:32.7000 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2021-03-19 19:02:32.7036 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2021-03-19 19:02:32.7036 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.7036 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.7036 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.7036 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2021-03-19 19:02:32.7036 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2021-03-19 19:02:32.7075 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2021-03-19 19:02:32.7075 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.7075 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.7075 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.7075 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2021-03-19 19:02:32.7120 Info Adding target FileTarget(Name=logfile)
+2021-03-19 19:02:32.7120 Debug Registered target logfile: NLog.Targets.FileTarget
+2021-03-19 19:02:32.7172 Trace ParseRulesElement
+2021-03-19 19:02:32.7616 Debug Watching path '/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0' filter 'nlog.config' for changes.
+2021-03-19 19:02:32.7650 Debug --- NLog configuration dump ---
+2021-03-19 19:02:32.7650 Debug Targets:
+2021-03-19 19:02:32.7678 Debug File Target[logfile]
+2021-03-19 19:02:32.7678 Debug Rules:
+2021-03-19 19:02:32.7743 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2021-03-19 19:02:32.7743 Debug --- End of NLog configuration dump ---
+2021-03-19 19:02:32.7847 Trace FindReachableObject<System.Object>:
+2021-03-19 19:02:32.7847 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2021-03-19 19:02:32.7847 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2021-03-19 19:02:32.7889 Trace  Scanning FileTarget 'File Target[logfile]'
+2021-03-19 19:02:32.7889 Trace   Scanning Property FileName ''/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt'' NLog.Layouts
+2021-03-19 19:02:32.7889 Trace   Scanning SimpleLayout ''/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt''
+2021-03-19 19:02:32.7913 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.7913 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.7913 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2021-03-19 19:02:32.7913 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.7913 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2021-03-19 19:02:32.7958 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2021-03-19 19:02:32.7958 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.7958 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2021-03-19 19:02:32.7958 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.7958 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2021-03-19 19:02:32.7994 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2021-03-19 19:02:32.7994 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2021-03-19 19:02:32.7994 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.7994 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.7994 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.8036 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2021-03-19 19:02:32.8036 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2021-03-19 19:02:32.8036 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2021-03-19 19:02:32.8073 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2021-03-19 19:02:32.8134 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/bin/Debug/net5.0/nlog.config
+2021-03-19 19:02:32.8207 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2021-03-19 19:02:32.8341 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2021-03-19 19:02:32.8358 Trace Initializing Layout Renderer: ${message}
+2021-03-19 19:02:32.8358 Trace Initializing Layout Renderer: ${literal}
+2021-03-19 19:02:32.8358 Trace Initializing Layout Renderer: ${level}
+2021-03-19 19:02:32.8394 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2021-03-19 19:02:32.8484 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.8484 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2021-03-19 19:02:32.8484 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.8484 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.8573 Trace Initializing Layout Renderer: ${uppercase}
+2021-03-19 19:02:32.8573 Trace Initializing Layout Renderer: ${literal}
+2021-03-19 19:02:32.8573 Trace Initializing Layout Renderer: ${longdate}
+2021-03-19 19:02:32.8601 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2021-03-19 19:02:32.8601 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.8601 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2021-03-19 19:02:32.8601 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.8601 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2021-03-19 19:02:32.8601 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.8637 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2021-03-19 19:02:32.8637 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2021-03-19 19:02:32.8637 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2021-03-19 19:02:32.8637 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.8637 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2021-03-19 19:02:32.8637 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.8637 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2021-03-19 19:02:32.8687 Trace Initializing Layout Renderer: ${literal}
+2021-03-19 19:02:32.8687 Trace Initializing Layout Renderer: ${shortdate}
+2021-03-19 19:02:32.8687 Trace Initializing Layout Renderer: ${literal}
+2021-03-19 19:02:32.8687 Trace Initializing '/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt'
+2021-03-19 19:02:32.8713 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2021-03-19 19:02:32.8713 Trace Scanning SimpleLayout ''/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt''
+2021-03-19 19:02:32.8713 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2021-03-19 19:02:32.8713 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.8713 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2021-03-19 19:02:32.8713 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2021-03-19 19:02:32.8756 Trace Initializing File Target[logfile]
+2021-03-19 19:02:32.8810 Trace FindReachableObject<NLog.Layouts.Layout>:
+2021-03-19 19:02:32.8810 Trace Scanning FileTarget 'File Target[logfile]'
+2021-03-19 19:02:32.8810 Trace  Scanning Property FileName ''/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt'' NLog.Layouts
+2021-03-19 19:02:32.8835 Trace  Scanning SimpleLayout ''/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/${shortdate}_log.txt''
+2021-03-19 19:02:32.8835 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2021-03-19 19:02:32.8835 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2021-03-19 19:02:32.8835 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2021-03-19 19:02:32.8835 Trace File Target[logfile] has 2 layouts
+2021-03-19 19:02:32.8916 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2021-03-19 19:02:32.8991 Info Configuration initialized.
+2021-03-19 19:02:32.9030 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-03-19 19:02:32.9136 Debug Targets for OnlineExamAPI.common.LoggerService by level:
+2021-03-19 19:02:32.9136 Debug Trace =>
+2021-03-19 19:02:32.9157 Debug Debug => logfile
+2021-03-19 19:02:32.9157 Debug Info => logfile
+2021-03-19 19:02:32.9157 Debug Warn => logfile
+2021-03-19 19:02:32.9157 Debug Error => logfile
+2021-03-19 19:02:32.9157 Debug Fatal => logfile
+2021-03-19 19:02:32.9808 Debug FileTarget(Name=logfile): Preparing for new file '/media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt'
+2021-03-19 19:02:32.9974 Debug Creating file appender: /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt
+2021-03-19 19:02:33.0035 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:13:40.7565 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:16:56.3948 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:17:47.6724 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:18:23.1290 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:19:17.1301 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:24:11.4354 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:24:52.0974 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:25:56.4394 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:26:26.4540 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:27:34.8210 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:28:23.6253 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:28:59.8229 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:29:43.7489 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:29:52.4594 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:30:14.1694 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:30:38.1598 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:30:54.9434 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:31:14.7135 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:51:40.1599 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:53:08.8679 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:53:55.7430 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:55:14.5461 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:56:32.6896 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:57:25.8411 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 19:57:55.4625 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:01:34.0755 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:02:30.1837 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:05:14.3989 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:05:51.3595 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:06:18.9139 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:06:35.0092 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:07:15.8663 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:08:13.0653 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:08:50.1659 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:09:14.0933 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:09:43.0065 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:10:08.6677 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:10:30.3437 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:10:51.4543 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:10:56.8756 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:11:31.6637 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:11:58.3604 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:12:03.0738 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:18:24.7503 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:18:54.1055 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:26:25.9520 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:27:07.3306 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
+2021-03-19 20:27:34.9740 Trace Opening /media/sasikumar/New Volume/WorkSpace/OnlineExamAPI/LOG/2021-03-19_log.txt with allowFileSharedWriting=False
